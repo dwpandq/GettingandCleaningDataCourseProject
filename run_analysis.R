@@ -34,6 +34,7 @@ if (!file.exists("UCI HAR Dataset")) {
 # Preperation for merging data files - Create dataframes from the
 # appropriate .txt files
 
+
 features <- read.table("UCI HAR Dataset/features.txt",
                        col.names = c("rownumber","functions"),
                        colClasses = c("integer", "character"))
@@ -70,18 +71,21 @@ mergeddata <- cbind(subjectcombined, ycombined, xcombined)
 # each measurement.                                                       #
 ###########################################################################
 
+#Uses only the mean and standard deviation measurements.
 tidyupthedata <- mergeddata %>% select(subject, codenumber, contains("mean"), contains("std"))
 
 #############################################################################
 # 3. Uses descriptive activity names to name the activities in the data set #
 #############################################################################
 
+# Uses the activity names already listed in the file activity_labels.txt
 tidyupthedata$codenumber <- activities[tidyupthedata$codenumber, 2]
 
 #########################################################################
 # 4. Appropriately labels the data set with descriptive variable names. #
 #########################################################################
 
+# Cleaning up the messy column names.
 names(tidyupthedata)[2] = "activity"
 names(tidyupthedata)<-gsub("Acc", "Accelerometer", names(tidyupthedata))
 names(tidyupthedata)<-gsub("Gyro", "Gyroscope", names(tidyupthedata))
