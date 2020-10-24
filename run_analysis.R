@@ -1,11 +1,8 @@
-
-
+# Clean up environment
+rm(list = ls())
 
 # Loading appropriate library for project
 library(dplyr)
-
-# Clean up environment
-rm(list = ls())
 
 #Beginning of tracking runtime for code
 start_time <- Sys.time()
@@ -31,7 +28,7 @@ if (!file.exists("UCI HAR Dataset")) {
 # Step 1. Merges the training and the test sets to create one data set.#
 ########################################################################
 
-# Preperation for merging data files - Create dataframes from the
+# Preparation for merging data files - Create dataframes from the
 # appropriate .txt files
 
 
@@ -87,21 +84,21 @@ tidyupthedata$codenumber <- activities[tidyupthedata$codenumber, 2]
 
 # Cleaning up the messy column names.
 names(tidyupthedata)[2] = "activity"
-names(tidyupthedata)<-gsub("Acc", "Accelerometer", names(tidyupthedata))
-names(tidyupthedata)<-gsub("Gyro", "Gyroscope", names(tidyupthedata))
-names(tidyupthedata)<-gsub("BodyBody", "Body", names(tidyupthedata))
-names(tidyupthedata)<-gsub("Mag", "Magnitude", names(tidyupthedata))
-names(tidyupthedata)<-gsub("^t", "Time", names(tidyupthedata))
-names(tidyupthedata)<-gsub("^f", "Frequency", names(tidyupthedata))
-names(tidyupthedata)<-gsub("tBody", "TimeBody", names(tidyupthedata))
-names(tidyupthedata)<-gsub("-mean()", "Mean", names(tidyupthedata),
+names(tidyupthedata) <- gsub("Acc", "Accelerometer", names(tidyupthedata))
+names(tidyupthedata) <- gsub("Gyro", "Gyroscope", names(tidyupthedata))
+names(tidyupthedata) <- gsub("BodyBody", "Body", names(tidyupthedata))
+names(tidyupthedata) <- gsub("Mag", "Magnitude", names(tidyupthedata))
+names(tidyupthedata) <- gsub("^t", "Time", names(tidyupthedata))
+names(tidyupthedata) <- gsub("^f", "Frequency", names(tidyupthedata))
+names(tidyupthedata) <- gsub("tBody", "TimeBody", names(tidyupthedata))
+names(tidyupthedata) <- gsub("-mean()", "Mean", names(tidyupthedata),
     ignore.case = TRUE)
-names(tidyupthedata)<-gsub("-std()", "STD", names(tidyupthedata),
+names(tidyupthedata) <- gsub("-std()", "STD", names(tidyupthedata),
     ignore.case = TRUE)
-names(tidyupthedata)<-gsub("-freq()", "Frequency", names(tidyupthedata),
+names(tidyupthedata) <- gsub("-freq()", "Frequency", names(tidyupthedata),
     ignore.case = TRUE)
-names(tidyupthedata)<-gsub("angle", "Angle", names(tidyupthedata))
-names(tidyupthedata)<-gsub("gravity", "Gravity", names(tidyupthedata))
+names(tidyupthedata) <- gsub("angle", "Angle", names(tidyupthedata))
+names(tidyupthedata) <- gsub("gravity", "Gravity", names(tidyupthedata))
 
 ###############################################################################
 # 5. From the data set in step 4, creates a second, independent tidy data set #
