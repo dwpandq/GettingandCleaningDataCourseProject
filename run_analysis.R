@@ -70,38 +70,41 @@ mergeddata <- cbind(subjectcombined, ycombined, xcombined)
 # each measurement.                                                       #
 ###########################################################################
 
-tidydata <- mergeddata %>% select(subject, codenumber, contains("mean"), contains("std"))
+tidyupthedata <- mergeddata %>% select(subject, codenumber, contains("mean"), contains("std"))
 
 #############################################################################
 # 3. Uses descriptive activity names to name the activities in the data set #
 #############################################################################
 
-tidydata$codenumber <- activities[tidydata$codenumber, 2]
+tidyupthedata$codenumber <- activities[tidyupthedata$codenumber, 2]
 
 #########################################################################
 # 4. Appropriately labels the data set with descriptive variable names. #
 #########################################################################
 
-names(tidydata)[2] = "activity"
-names(tidydata)<-gsub("Acc", "Accelerometer", names(tidydata))
-names(tidydata)<-gsub("Gyro", "Gyroscope", names(tidydata))
-names(tidydata)<-gsub("BodyBody", "Body", names(tidydata))
-names(tidydata)<-gsub("Mag", "Magnitude", names(tidydata))
-names(tidydata)<-gsub("^t", "Time", names(tidydata))
-names(tidydata)<-gsub("^f", "Frequency", names(tidydata))
-names(tidydata)<-gsub("tBody", "TimeBody", names(tidydata))
-names(tidydata)<-gsub("-mean()", "Mean", names(tidydata), ignore.case = TRUE)
-names(tidydata)<-gsub("-std()", "STD", names(tidydata), ignore.case = TRUE)
-names(tidydata)<-gsub("-freq()", "Frequency", names(tidydata), ignore.case = TRUE)
-names(tidydata)<-gsub("angle", "Angle", names(tidydata))
-names(tidydata)<-gsub("gravity", "Gravity", names(tidydata))
+names(tidyupthedata)[2] = "activity"
+names(tidyupthedata)<-gsub("Acc", "Accelerometer", names(tidyupthedata))
+names(tidyupthedata)<-gsub("Gyro", "Gyroscope", names(tidyupthedata))
+names(tidyupthedata)<-gsub("BodyBody", "Body", names(tidyupthedata))
+names(tidyupthedata)<-gsub("Mag", "Magnitude", names(tidyupthedata))
+names(tidyupthedata)<-gsub("^t", "Time", names(tidyupthedata))
+names(tidyupthedata)<-gsub("^f", "Frequency", names(tidyupthedata))
+names(tidyupthedata)<-gsub("tBody", "TimeBody", names(tidyupthedata))
+names(tidyupthedata)<-gsub("-mean()", "Mean", names(tidyupthedata),
+    ignore.case = TRUE)
+names(tidyupthedata)<-gsub("-std()", "STD", names(tidyupthedata),
+    ignore.case = TRUE)
+names(tidyupthedata)<-gsub("-freq()", "Frequency", names(tidyupthedata),
+    ignore.case = TRUE)
+names(tidyupthedata)<-gsub("angle", "Angle", names(tidyupthedata))
+names(tidyupthedata)<-gsub("gravity", "Gravity", names(tidyupthedata))
 
 ###############################################################################
 # 5. From the data set in step 4, creates a second, independent tidy data set #
 # with the average of each variable for each activity and each subject.       #
 ###############################################################################
 
-cleaneddata <- tidydata %>%
+cleaneddata <- tidyupthedata %>%
     group_by(subject, activity) %>%
     summarise_all(list(mean))
 write.table(cleaneddata, "projectresults.txt", row.name=FALSE)
